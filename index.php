@@ -14,7 +14,6 @@ Autoloader::register();
 
 
 /**
- * Router
+ * Routes
  */
-require __DIR__ . '/Classes/Router.php';
-$app = new Router();
+require __DIR__ . '/routes.php';
