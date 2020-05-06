@@ -2,19 +2,20 @@
 
 use Classes\Route;
 
-$route = new Route();
 
-$route->set('/', [
+Route::set('/', [
     'controller' => 'Home',
     'method' => 'index',
 ]);
-$route->set('/posts', [
+
+Route::set('/posts', [
     'controller' => 'Post',
     'method' => 'all',
 ]);
-// $route->set('/about');
 
+Route::set('/post/edit', [
+    'controller' => 'Post',
+    'method' => 'edit',
+]);
 
-
-
-$route->execute();
+Route::execute();
