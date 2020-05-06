@@ -10,7 +10,7 @@ Route::set('/', [
 
 Route::set('/posts', [
     'controller' => 'Post',
-    'method' => 'all',
+    'method' => 'showAll',
 ]);
 
 Route::set('/post/edit', [

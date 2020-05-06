@@ -6,11 +6,16 @@ class Post extends Controller
 {
     public function __construct()
     {
-        echo 'Post controller';
+        parent::__construct();
     }
 
-    public function all()
+    public function showAll()
     {
-        echo 'All Posts!';
+        $this->view->render('post/showAll');
+    }
+
+    public function Edit(int $id)
+    {
+        echo 'edit post: ' . $id;
     }
 }

@@ -1,0 +1,1 @@
+<h1>All posts here</h1>

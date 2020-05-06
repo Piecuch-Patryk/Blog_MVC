@@ -47,6 +47,7 @@ class Route
                     self::$_controller_not_found = false;
                     $controller = 'Controllers\\' . self::$_controllers[$key];
                     $controller = new $controller;
+                    $controller->loadModel(self::$_controllers[$key]);
 
                     $method = self::$_methods[$key];
 
