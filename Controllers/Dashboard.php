@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Classes\Auth;
+use Classes\Session;
 
 class Dashboard extends Controller
 {
@@ -10,10 +11,11 @@ class Dashboard extends Controller
     {
         Auth::checkLogin();
         parent::__construct();
-        $this->userData = $_SESSION;
+        $this->view->userData = $_SESSION;
     }
     public function index()
     {
+        $this->view->pageTitle = 'Dashboard - ' . Session::get('fullName');
         $this->view->render('dashboard/index');
     }
 }

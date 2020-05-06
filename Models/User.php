@@ -27,6 +27,7 @@ class User extends Model
             if(Hash::verify($password, $result['password'])) {
                 unset($result['password']);
                 Session::set('logged', true);
+                $result['fullName'] = $result['name'] . ' ' . $result['surname'];
                 Session::setMany($result);
                 return $result;
             }
