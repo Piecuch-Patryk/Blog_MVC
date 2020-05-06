@@ -6,12 +6,13 @@ class Session
 {
     public static function init()
     {
-        session_start();
+        if(!isset($_SESSION)) session_start();
     }
 
     public static function set(string $key, $value)
     {
         $_SESSION[$key] = $value;
+        echo $_SESSION[$key];
     }
 
     public static function setMany(array $data)
@@ -34,6 +35,7 @@ class Session
 
     public static function destroy()
     {
+        self::init();
         session_destroy();
     }
 }

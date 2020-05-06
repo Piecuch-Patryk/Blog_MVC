@@ -4,18 +4,15 @@ namespace Controllers;
 
 use Classes\Validate;
 use Classes\Redirect;
-use Classes\Session;
+use Classes\Auth;
 
 class User extends Controller
 {
 
     public function index()
     {
-        Session::init();
-        if(Session::check('logged', true)) Redirect::to('dashboard');
         $this->view->render('user/index');
     }
-
 
     public function login()
     {
@@ -26,6 +23,7 @@ class User extends Controller
 
             if($user) {
                 // Logged in
+                Auth::setLogged();
                 Redirect::to('dashboard');
             }else {
                 // Error - wrong email/password
@@ -39,8 +37,7 @@ class User extends Controller
 
     public function logout()
     {
-        Session::destroy();
-        Redirect::to('home');
+        Auth::destroyLogin();
     }
 
 }
