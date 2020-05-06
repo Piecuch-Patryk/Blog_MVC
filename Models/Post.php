@@ -6,6 +6,7 @@ class Post extends Model
 {
     public function __construct()
     {
-        echo 'post model';
+        parent::__construct();
+        echo 'post model <br>';
     }
 }

@@ -13,6 +13,7 @@ class Redirect
     {
         $fileName = ($fileName === 'home') ? '' : $fileName;
         $path = APP_URL . $fileName;
+
         header("Location: $path");
         exit;
     }
