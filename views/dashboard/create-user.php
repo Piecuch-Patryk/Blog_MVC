@@ -7,6 +7,10 @@
 <p>Sorry, given email already exists in databse. Use different email address.</p>
 <?php endif ?>
 
+<?php if(isset($this->error)): ?>
+<p>Something went wrong. Please try again.</p>
+<?php endif ?>
+
 <?php if (isset($this->errors)): ?>
 <ul>
 <?php foreach ($this->errors as $key => $value): ?>

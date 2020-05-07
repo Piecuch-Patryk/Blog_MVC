@@ -34,11 +34,11 @@ class User extends Controller
             $result = $this->Model->store();
 
             if($result) {
-                Session::set('userCreated', 'User created successfully.');
+                Session::set('userCreated', true);
                 Redirect::to('dashboard/users');
             }else {
                 // Error
-                $this->view->error = 'Something went wrong. Please try again.';
+                $this->view->error = true;
                 $this->view->render('dashboard/create-user');
             }
         }else {
