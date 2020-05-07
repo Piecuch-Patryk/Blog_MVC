@@ -12,11 +12,11 @@ class Session
     public static function set(string $key, $value)
     {
         $_SESSION[$key] = $value;
-        echo $_SESSION[$key];
     }
 
     public static function setMany(array $data)
     {
+        self::init();
         foreach ($data as $key => $value) {
             self::set($key, $value);
         }
