@@ -21,9 +21,11 @@ class User extends Controller
 
         $errors = Validate::createUserForm();
         $userExists = $this->Model->get(Input::get('email'));
-        
+        $postedData = Input::getAll();
+
         if ($userExists) {
             $this->view->userExists = true;
+            $this->view->postedData = $postedData;
             $this->view->render('dashboard/create-user');
         }
         else if(!is_array($errors)) {
@@ -39,6 +41,7 @@ class User extends Controller
             }
         }else {
             // Error - validation fail
+            $this->view->postedData = $postedData;
             $this->view->errors = $errors;
             $this->view->render('dashboard/create-user');
         }

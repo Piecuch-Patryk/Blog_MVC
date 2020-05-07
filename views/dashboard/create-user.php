@@ -21,16 +21,17 @@
 <form action="<?php echo $this->url->to('user/store') ?>" method="post">
 
     <label for="name">Name</label>
-    <input name="name" type="text">
+    <input name="name" type="text" value="<?php echo isset($this->postedData['name']) ? $this->postedData['name'] : ''; ?>">
     <label for="surname">Surname</label>
-    <input name="surname" type="text">
+    <input name="surname" type="text" value="<?php echo isset($this->postedData['surname']) ? $this->postedData['surname'] : ''; ?>">
     <label for="email">Email</label>
-    <input name="email" type="text">
+    <input name="email" type="text" value="<?php echo isset($this->postedData['email']) ? $this->postedData['email'] : ''; ?>">
     <label for="role">Role</label>
     <select name="role">
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-        <option value="owner">Owner</option>
+        <?php isset($this->postedData['role']) ? $this->role = $this->postedData['role'] : $this->role = ''; ?>
+        <option value="user" <?php echo $this->role === 'user' ? 'selected' : ''; ?>>User</option>
+        <option value="admin" <?php echo $this->role === 'admin' ? 'selected' : ''; ?>>Admin</option>
+        <option value="owner" <?php echo $this->role === 'owner' ? 'selected' : ''; ?>>Owner</option>
     </select>
     <label for="password">Password</label>
     <input name="password" type="password">
