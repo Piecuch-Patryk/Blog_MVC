@@ -19,4 +19,9 @@ class Dashboard extends Controller
         $this->view->pageTitle = 'Dashboard - ' . Session::get('fullName');
         $this->view->render('dashboard/index');
     }
+
+    public function createUser()
+    {
+        $this->view->render('dashboard/create-user');
+    }
 }

@@ -2,14 +2,14 @@
 
 namespace Controllers;
 
-use Classes\Auth;
+use Classes\Session;
 use Classes\Redirect;
 
 class Home extends Controller
 {
     public function __construct()
     {
-        if(Auth::checkLogin()) Redirect::to('dashboard');
+        if(Session::check('logged', true)) Redirect::to('dashboard');
         parent::__construct();
     }
 
