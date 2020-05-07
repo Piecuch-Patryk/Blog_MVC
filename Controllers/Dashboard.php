@@ -12,6 +12,7 @@ class Dashboard extends Controller
         Auth::checkLogin();
         parent::__construct();
         $this->view->userData = $_SESSION;
+        $this->view->logged = true;
     }
     public function index()
     {

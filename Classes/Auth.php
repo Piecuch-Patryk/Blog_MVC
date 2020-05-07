@@ -25,6 +25,7 @@ class Auth
     {
         Session::init();
         if(!Session::check('logged', true)) Redirect::to('home');
+        else return true;
     }
     
     /**
