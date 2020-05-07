@@ -8,6 +8,11 @@ class Validate
 {
     private static $_errors = [];
 
+    public static function request()
+    {
+        return $_SERVER['REQUEST_METHOD'] === 'POST';
+    }
+
     public static function loginForm()
     {
         self::email();
@@ -28,5 +33,26 @@ class Validate
     {
         $password = Input::get('password');
         if (empty($password)) self::$_errors['password'] = 'Password required.';
+    }
+
+    private static function name()
+    {
+        $name = Input::get('name');
+        if  (empty($name)) self::$_errors['name'] = 'Name required.';
+        else if (!ctype_alpha($name)) self::$_errors['name'] = 'Name can only contains letters.';
+    }
+
+    private static function surName()
+    {
+        $name = Input::get('name');
+        if  (empty($name)) self::$_errors['surname'] = 'Surname required.';
+        else if (!ctype_alpha($name)) self::$_errors['surname'] = 'Surname can only contains letters.';
+    }
+
+    private static function passwordMatch()
+    {
+        $password_1 = Input::get('password');
+        $password_2 = Input::get('password-repeat');
+        if ($password_1 !== $password_2) self::$_errors['password-repeat'] = 'Both passwords must be the same.';
     }
 }

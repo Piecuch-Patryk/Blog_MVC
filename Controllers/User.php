@@ -16,6 +16,7 @@ class User extends Controller
 
     public function login()
     {
+        if (!Validate::request()) Redirect::to('home');
         $errors = Validate::loginForm();
         
         if(!is_array($errors)) {
