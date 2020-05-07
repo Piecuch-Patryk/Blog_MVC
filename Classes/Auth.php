@@ -31,7 +31,6 @@ class Auth
     /**
      * destroyLogin     Destroys $_SESSION and redirects to home page.
      *
-     * @return void
      */
     public static function destroyLogin()
     {

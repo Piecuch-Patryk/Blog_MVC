@@ -9,13 +9,23 @@ use Classes\Auth;
 use Classes\Session;
 
 class User extends Controller
-{
+{    
+    /**
+     * index        Renders login page.
+     *              If form validation fails, shows last typed values. (better UX)
+     *
+     */
     public function index()
     {
         if (Session::check('loginError', true)) $this->view->postedData = Session::get('email');
         $this->view->render('user/index');
     }
-
+    
+    /**
+     * store        Stores created user in database.
+     *              Only if given email does not occur in database.
+     *
+     */
     public function store()
     {
         if (!Validate::request()) Redirect::to('home');
@@ -48,7 +58,11 @@ class User extends Controller
             $this->view->render('dashboard/create-user');
         }
     }
-
+    
+    /**
+     * login        Performs login form validation.
+     *
+     */
     public function login()
     {
         if (!Validate::request()) Redirect::to('home');
@@ -77,7 +91,11 @@ class User extends Controller
             Redirect::to('login');
         }
     }
-
+    
+    /**
+     * showAll      Shows all users.
+     *
+     */
     public function showAll()
     {
         $isUserCreated = Session::get('userCreated');
@@ -87,7 +105,12 @@ class User extends Controller
         $this->view->users = $users;
         $this->view->render('dashboard/users');
     }
-
+    
+    /**
+     * edit     Renders view for user edit with the user's data.
+     *
+     * @param  int $id
+     */
     public function edit(int $id)
     {
         $user = $this->Model->get('id', $id);
@@ -100,12 +123,22 @@ class User extends Controller
 
         $this->view->render('dashboard/edit-user');
     }
-
+    
+    /**
+     * delete       Delets user by given id.
+     *
+     * @param  int $id
+     */
     public function delete(int $id)
     {
         var_dump($id);
     }
-
+    
+    /**
+     * logout       Performs logout action.
+     *
+     * @return void
+     */
     public function logout()
     {
         Auth::destroyLogin();

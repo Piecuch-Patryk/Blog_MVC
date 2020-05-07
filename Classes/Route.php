@@ -12,7 +12,13 @@ class Route
     private static $_arg = null;
     private static $_auth = false;
 
-
+    
+    /**
+     * set      Sets all routes defined in root/routes.php
+     *
+     * @param  string   $uri
+     * @param  array    $options
+     */
     public static function set(string $uri, array $options)
     {
         array_push(self::$_routes, $uri);
@@ -24,7 +30,6 @@ class Route
      * execute      Search given controller_name/method_name/arg[optional] in registered routes.
      *              Shows 404 error if none found.
      *
-     * @return void
      */
     public static function execute()
     {

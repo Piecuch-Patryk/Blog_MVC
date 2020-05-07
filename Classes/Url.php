@@ -8,7 +8,7 @@ class Url
      * to       Creates link to specified location.
      *
      * @param  string $location
-     * @return string
+     * @return string $url
      */
     public function to(string $location)
     {

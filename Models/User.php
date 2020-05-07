@@ -14,7 +14,14 @@ class User extends Model
     {
         parent::__construct();
     }
-
+    
+    /**
+     * get      Gets user from database.
+     *
+     * @param  string $where
+     * @param  string $value
+     * @return false||array     $array with query result.
+     */
     public function get(string $where, string $value)
     {
         $conn = $this->db->connect();
@@ -24,7 +31,12 @@ class User extends Model
         ]);
         return $stmt->fetch();
     }
-
+    
+    /**
+     * getAll   Gets all users from database.
+     *
+     * @return bool||array  $array with query result.
+     */
     public function getAll()
     {
         $conn = $this->db->connect();
@@ -32,7 +44,12 @@ class User extends Model
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
+        
+    /**
+     * login    Retrieves user by given login and compares password's hash with given one.
+     *
+     * @return false||array $array with query result. 
+     */
     public function login()
     {
         $email = Input::get('email');
@@ -54,7 +71,12 @@ class User extends Model
         Session::set('error', 'Incorrect email or password.');
         return false;
     }
-
+    
+    /**
+     * store    Stores created user in database.
+     *
+     * @return bool
+     */
     public function store()
     {
         $conn = $this->db->connect();

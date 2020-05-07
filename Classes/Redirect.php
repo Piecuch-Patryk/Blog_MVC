@@ -7,7 +7,7 @@ class Redirect
     /**
      * to       Redirects to specified location.
      *
-     * @param  str $fileName
+     * @param  string $fileName
      */
     public static function to(string $fileName)
     {

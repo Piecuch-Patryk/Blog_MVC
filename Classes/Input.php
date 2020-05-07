@@ -3,13 +3,24 @@
 namespace Classes;
 
 class Input
-{
+{    
+    /**
+     * get      Gets value from global $_POST by given name.
+     *
+     * @param  string $name
+     * @return string value||empty string
+     */
     public static function get(string $name)
     {
         if(isset($_POST)) return $_POST[$name];
         else return '';
     }
-
+    
+    /**
+     * getAll   Gets all values from global $_POST method
+     *
+     * @return array $values
+     */
     public static function getAll()
     {
         $values = [];

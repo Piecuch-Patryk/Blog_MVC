@@ -37,6 +37,8 @@ Route::set('/dashboard/create-user', [
     'controller' => 'Dashboard',
     'method' => 'createUser',
 ]);
+
+// Dashboard - store created user
 Route::set('/user/store', [
     'controller' => 'User',
     'method' => 'store',
@@ -60,14 +62,17 @@ Route::set('/user/delete', [
     'method' => 'delete',
 ]);
 
+// Posts
 Route::set('/posts', [
     'controller' => 'Post',
     'method' => 'showAll',
 ]);
 
+// Post - edit
 Route::set('/post/edit', [
     'controller' => 'Post',
     'method' => 'edit',
 ]);
 
+// Registers defined routes. 
 Route::execute();

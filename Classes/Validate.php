@@ -7,12 +7,22 @@ use Classes\Input;
 class Validate
 {
     private static $_errors = [];
-
+    
+    /**
+     * request      Validates if request equals POST.
+     *
+     * @return bool
+     */
     public static function request()
     {
         return $_SERVER['REQUEST_METHOD'] === 'POST';
     }
-
+    
+    /**
+     * createUserForm   Validates create user form.
+     *
+     * @return mixed true || array $_errors
+     */
     public static function createUserForm()
     {
         self::name();

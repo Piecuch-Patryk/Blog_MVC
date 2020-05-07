@@ -6,7 +6,12 @@ use Classes\View;
 use Classes\Session;
 
 class Controller
-{
+{    
+    /**
+     * __construct      Instantiates View class to use within this class.
+     *                  Sets user data for logged in/out user.
+     *
+     */
     public function __construct()
     {
         $this->view = new View();
@@ -18,7 +23,7 @@ class Controller
     }
     
     /**
-     * loadModel
+     * loadModel    Loads model if exists.
      *
      * @param  string $name
      */
