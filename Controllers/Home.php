@@ -10,6 +10,7 @@ class Home extends Controller
     public function __construct()
     {
         if(Session::check('logged', true)) Redirect::to('dashboard');
+        else Session::destroy();
         parent::__construct();
     }
 
