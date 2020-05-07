@@ -81,6 +81,9 @@ class User extends Controller
     {
         $isUserCreated = Session::get('userCreated');
         if ($isUserCreated) $this->view->userCreated = $isUserCreated;
+
+        $users = $this->Model->getAll();
+        $this->view->users = $users;
         $this->view->render('dashboard/users');
     }
 

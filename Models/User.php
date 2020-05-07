@@ -24,6 +24,14 @@ class User extends Model
         ]);
         return $stmt->fetch();
     }
+
+    public function getAll()
+    {
+        $conn = $this->db->connect();
+        $stmt = $conn->prepare("SELECT `id`, `name`, `surname`, `email`, `role`, `created_at` FROM `$this->_table` ORDER BY `created_at` DESC");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     
     public function login()
     {
