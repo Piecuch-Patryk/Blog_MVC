@@ -15,12 +15,12 @@ class User extends Model
         parent::__construct();
     }
 
-    public function get(string $email)
+    public function get(string $where, string $value)
     {
         $conn = $this->db->connect();
-        $stmt = $conn->prepare("SELECT id, name, surname, password, email, created_at FROM $this->_table WHERE `email` = :email");
+        $stmt = $conn->prepare("SELECT id, name, surname, password, email, role, created_at FROM $this->_table WHERE `$where` = :value");
         $stmt->execute([
-            ':email' => $email,
+            ':value' => $value,
         ]);
         return $stmt->fetch();
     }
@@ -38,7 +38,7 @@ class User extends Model
         $email = Input::get('email');
         $password = Input::get('password');
 
-        $result = $this->get($email);
+        $result = $this->get('email', $email);
         Session::init();
 
         if($result) {

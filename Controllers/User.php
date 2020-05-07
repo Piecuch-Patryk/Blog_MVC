@@ -21,7 +21,7 @@ class User extends Controller
         if (!Validate::request()) Redirect::to('home');
 
         $errors = Validate::createUserForm();
-        $userExists = $this->Model->get(Input::get('email'));
+        $userExists = $this->Model->get('email' ,Input::get('email'));
         $postedData = Input::getAll();
 
         if ($userExists) {
@@ -64,6 +64,7 @@ class User extends Controller
             if($user) {
                 // Logged in
                 Auth::setLogged();
+                Session::set('role', $user['role']);
                 Redirect::to('dashboard');
             }else {
                 // Error - wrong email/password
@@ -85,6 +86,24 @@ class User extends Controller
         $users = $this->Model->getAll();
         $this->view->users = $users;
         $this->view->render('dashboard/users');
+    }
+
+    public function edit(int $id)
+    {
+        $user = $this->Model->get('id', $id);
+
+        if ($user) {
+            $this->view->fullName = $user['name'] . ' ' . $user['surname'];
+            foreach ($user as $key => $value) $this->view->{$key} = $value;
+        }
+        else $this->view->userDataError = true;
+
+        $this->view->render('dashboard/edit-user');
+    }
+
+    public function delete(int $id)
+    {
+        var_dump($id);
     }
 
     public function logout()

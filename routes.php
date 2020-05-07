@@ -48,6 +48,17 @@ Route::set('/dashboard/users', [
     'method' => 'showAll',
 ]);
 
+// Dashboard - edit user
+Route::set('/user/edit', [
+    'controller' => 'User',
+    'method' => 'edit',
+]);
+
+// Dashboard - delete user
+Route::set('/user/delete', [
+    'controller' => 'User',
+    'method' => 'delete',
+]);
 
 Route::set('/posts', [
     'controller' => 'Post',

@@ -10,7 +10,10 @@ class Controller
     public function __construct()
     {
         $this->view = new View();
-        if (Session::check('logged', true)) $this->view->logged = true;
+        if (Session::check('logged', true)) {
+            $this->view->logged = true;
+            $this->view->loggedUserRole = Session::get('role');
+        }
         else $this->view->logged = false;
     }
     
