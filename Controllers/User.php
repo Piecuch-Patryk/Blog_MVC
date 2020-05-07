@@ -12,6 +12,7 @@ class User extends Controller
 {
     public function index()
     {
+        if (Session::check('loginError', true)) $this->view->postedData = Session::get('email');
         $this->view->render('user/index');
     }
 
@@ -24,6 +25,7 @@ class User extends Controller
         $postedData = Input::getAll();
 
         if ($userExists) {
+            // Error - user occurs in db
             $this->view->userExists = true;
             $this->view->postedData = $postedData;
             $this->view->render('dashboard/create-user');
@@ -51,6 +53,10 @@ class User extends Controller
     {
         if (!Validate::request()) Redirect::to('home');
         $errors = Validate::loginForm();
+        $sessionData = [
+            'loginError' => true,
+            'email' => Input::get('email'),
+        ];
         
         if(!is_array($errors)) {
             $user = $this->Model->login();
@@ -61,10 +67,12 @@ class User extends Controller
                 Redirect::to('dashboard');
             }else {
                 // Error - wrong email/password
+                Session::setMany($sessionData);
                 Redirect::to('login');
             }
         }else {
             // Error - validation fail
+            Session::setMany($sessionData);
             Redirect::to('login');
         }
     }
