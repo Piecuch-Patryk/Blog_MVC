@@ -13,6 +13,18 @@ class Validate
         return $_SERVER['REQUEST_METHOD'] === 'POST';
     }
 
+    public static function createUserForm()
+    {
+        self::name();
+        self::surname();
+        self::email();
+        self::password();
+        self::passwordMatch();
+
+        if(empty(self::$_errors)) return true;
+        else return self::$_errors;
+    }
+
     public static function loginForm()
     {
         self::email();
@@ -42,9 +54,9 @@ class Validate
         else if (!ctype_alpha($name)) self::$_errors['name'] = 'Name can only contains letters.';
     }
 
-    private static function surName()
+    private static function surname()
     {
-        $name = Input::get('name');
+        $name = Input::get('surname');
         if  (empty($name)) self::$_errors['surname'] = 'Surname required.';
         else if (!ctype_alpha($name)) self::$_errors['surname'] = 'Surname can only contains letters.';
     }

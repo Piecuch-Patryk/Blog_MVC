@@ -3,13 +3,15 @@
 namespace Controllers;
 
 use Classes\View;
+use Classes\Session;
 
 class Controller
 {
     public function __construct()
     {
         $this->view = new View();
-        $this->view->logged = false;
+        if (Session::check('logged', true)) $this->view->logged = true;
+        else $this->view->logged = false;
     }
     
     /**
