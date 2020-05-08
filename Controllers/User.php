@@ -10,6 +10,15 @@ use Classes\Session;
 
 class User extends Controller
 {    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->view->postedData = '';
+        $this->view->e_email = '';
+        $this->view->e_password = '';
+        $this->view->e_logging = '';
+    }
+
     /**
      * index        Renders login page.
      *              If form validation fails, shows last typed values. (better UX)
@@ -17,7 +26,12 @@ class User extends Controller
      */
     public function index()
     {
-        if (Session::check('loginError', true)) $this->view->postedData = Session::get('email');
+        if (Session::check('loginError', true)) {
+            $this->view->e_logging = true;
+            $this->view->postedData = Session::get('email');
+            $this->view->e_email = Session::get('e_email');
+            $this->view->e_password = Session::get('e_password');
+        }
         $this->view->render('user/index');
     }
     
@@ -88,6 +102,7 @@ class User extends Controller
         }else {
             // Error - validation fail
             Session::setMany($sessionData);
+            Session::setMany($errors);
             Redirect::to('login');
         }
     }

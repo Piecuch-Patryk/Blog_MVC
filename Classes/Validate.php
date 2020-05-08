@@ -47,34 +47,44 @@ class Validate
     {
         $email = Input::get('email');
 
-        if (empty($email)) self::$_errors['email'] = 'Email address required.';
-        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) self::$_errors['email'] = 'Provide correct email address.';
+        if (empty($email)) self::$_errors['e_email'] = 'Email address required.';
+        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) self::$_errors['e_email'] = 'Provide correct email address.';
+        else self::resetArrayField('e_email');
     }
 
     private static function password()
     {
         $password = Input::get('password');
-        if (empty($password)) self::$_errors['password'] = 'Password required.';
+        if (empty($password)) self::$_errors['e_password'] = 'Password required.';
+        else self::resetArrayField('e_password');
     }
 
     private static function name()
     {
         $name = Input::get('name');
-        if  (empty($name)) self::$_errors['name'] = 'Name required.';
-        else if (!ctype_alpha($name)) self::$_errors['name'] = 'Name can only contains letters.';
+        if  (empty($name)) self::$_errors['e_name'] = 'Name required.';
+        else if (!ctype_alpha($name)) self::$_errors['e_name'] = 'Name can only contains letters.';
+        else self::resetArrayField('e_name');
     }
 
     private static function surname()
     {
         $name = Input::get('surname');
-        if  (empty($name)) self::$_errors['surname'] = 'Surname required.';
-        else if (!ctype_alpha($name)) self::$_errors['surname'] = 'Surname can only contains letters.';
+        if  (empty($name)) self::$_errors['e_surname'] = 'Surname required.';
+        else if (!ctype_alpha($name)) self::$_errors['e_surname'] = 'Surname can only contains letters.';
+        else self::resetArrayField('e_surname');
     }
 
     private static function passwordMatch()
     {
         $password_1 = Input::get('password');
         $password_2 = Input::get('password-repeat');
-        if ($password_1 !== $password_2) self::$_errors['password-repeat'] = 'Both passwords must be the same.';
+        if ($password_1 !== $password_2) self::$_errors['e_password-repeat'] = 'Both passwords must be the same.';
+        else self::resetArrayField('e_password-repeat');
+    }
+
+    private static function resetArrayField($key)
+    {
+        self::$_errors[$key] = '';
     }
 }
