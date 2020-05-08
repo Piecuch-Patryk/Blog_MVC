@@ -85,6 +85,6 @@ class Validate
 
     private static function resetArrayField($key)
     {
-        self::$_errors[$key] = '';
+        unset(self::$_errors[$key]);
     }
 }
