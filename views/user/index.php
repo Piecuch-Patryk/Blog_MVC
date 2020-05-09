@@ -16,8 +16,8 @@
                     <p class="text-danger"><?php echo $this->e_password; ?></p>
                 </div>
                 <div class="form-group form-check text-center">
-                    <input name="remember-me" type="checkbox" class="form-check-input px-0">
-                    <label class="form-check-label px-0" for="remeber-me">Remember me</label>
+                    <!-- <input name="remember-me" type="checkbox" class="form-check-input px-0"> -->
+                    <!-- <label class="form-check-label px-0" for="remember-me">Remember me</label> -->
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
