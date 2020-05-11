@@ -19,12 +19,6 @@ class Dashboard extends Controller
         $this->view->userData = $_SESSION;
         $this->view->logged = true;
         $this->view->postedData = '';
-        $this->view->e_name = '';
-        $this->view->e_surname = '';
-        $this->view->e_email = '';
-        $this->view->e_password = '';
-        $this->view->e_password_repeat = '';
-        $this->view->e_logging = '';
     }
         
     /**
