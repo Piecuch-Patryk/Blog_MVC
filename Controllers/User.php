@@ -104,10 +104,10 @@ class User extends Controller
         $user = $this->Model->get('id', $id);
 
         if ($user) {
-            $this->view->fullName = $user['name'] . ' ' . $user['surname'];
+            $this->view->full_name = $user['name'] . ' ' . $user['surname'];
             foreach ($user as $key => $value) $this->view->{$key} = $value;
         }
-        else $this->view->userDataError = true;
+        else $this->view->user_data_error = true;
 
         $this->view->render('dashboard/edit-user');
     }
