@@ -13,11 +13,6 @@ class User extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->view->e_logging = NULL;
-        $this->view->old_email = NULL;
-        $this->view->e_email = NULL;
-        $this->view->e_password = NULL;
-        $this->view->e_logging = NULL;
     }
 
     /**
@@ -28,8 +23,8 @@ class User extends Controller
     public function index()
     {
         if (Session::check('login_form_fail', true)) {
-            $this->view->e_logging = Session::get('e_login_pair');
             $this->view->old_email = Session::get('old_email');
+            $this->view->e_login_pair = Session::get('e_login_pair');
             $this->view->e_email = Session::get('e_email');
             $this->view->e_password = Session::get('e_password');
         }
@@ -43,35 +38,21 @@ class User extends Controller
      */
     public function store()
     {
-        if (!Validate::request()) Redirect::to('home');
+        if (!Validate::request('POST')) Redirect::to('home');
+        if (Validate::createUserForm()) {
+            $userExists = $this->Model->get('email' ,Input::getSafe('email'));
+            if (!$userExists) {
+                $result = $this->Model->store();
+                if($result) {
+                    $this->view->role = SESSION::get('role');
+                    Session::set('user_created', true);
+                    Redirect::to('dashboard/users');
+                }else $this->view->db_error = true;      // Error - database error
+            }else $rhis->view->user_exists = true;      // Error - user unique
+        }else $this->view->errors = Validate::getErrors();    // Error - form validation failed
 
-        $errors = Validate::createUserForm();
-        $userExists = $this->Model->get('email' ,Input::get('email'));
-        $postedData = Input::getAll();
-
-        if ($userExists) {
-            // Error - user occurs in db
-            $this->view->userExists = true;
-            $this->view->postedData = $postedData;
-            $this->view->render('dashboard/create-user');
-        }
-        else if(!is_array($errors)) {
-            $result = $this->Model->store();
-
-            if($result) {
-                Session::set('userCreated', true);
-                Redirect::to('dashboard/users');
-            }else {
-                // Error
-                $this->view->error = true;
-                $this->view->render('dashboard/create-user');
-            }
-        }else {
-            // Error - validation fail
-            $this->view->postedData = $postedData;
-            $this->view->errors = $errors;
-            $this->view->render('dashboard/create-user');
-        }
+        $this->view->posted_data = Input::getAll();
+        $this->view->render('dashboard/create-user');
     }
     
     /**
@@ -89,14 +70,8 @@ class User extends Controller
                 Auth::setLogged();
                 Session::setMany($user);
                 Redirect::to('dashboard');
-            }else {
-                // Error - wrong login or password
-                Session::set('e_login_pair', true);
-            }
-        }else {
-            // Error - validation fails
-            Session::setMany(Validate::getErrors());
-        }
+            }else Session::set('e_login_pair', true);     // Error - wrong login or password
+        }else Session::setMany(Validate::getErrors());    // Error - validation fails
         
         Session::setMany([
             'old_email' => Input::getSafe('email'),
@@ -111,8 +86,8 @@ class User extends Controller
      */
     public function showAll()
     {
-        $isUserCreated = Session::get('userCreated');
-        if ($isUserCreated) $this->view->userCreated = $isUserCreated;
+        $user_created = Session::get('user_created');
+        if ($user_created) $this->view->user_created = true;
 
         $users = $this->Model->getAll();
         $this->view->users = $users;

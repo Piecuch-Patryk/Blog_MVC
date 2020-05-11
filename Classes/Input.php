@@ -24,7 +24,7 @@ class Input
      */
     public static function getSafe(string $name)
     {
-        return htmlentities(self::get($name), ENT_SUBSTITUTE);
+        return htmlentities(self::get($name));
     }
     
     /**
@@ -38,7 +38,7 @@ class Input
         if (isset($_POST)) {
             foreach ($_POST as $key => $value) {
                 if ($key !== 'password' && $key !== 'password-repeat')
-                $values[$key] = $value;
+                $values[$key] = htmlentities($value);
             }
             return $values;
         }

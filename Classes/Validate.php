@@ -38,8 +38,7 @@ class Validate
         self::password();
         self::passwordMatch();
 
-        if (empty(self::$_errors)) return true;
-        else return self::$_errors;
+        return empty(self::$_errors);
     }
 
     public static function loginForm()

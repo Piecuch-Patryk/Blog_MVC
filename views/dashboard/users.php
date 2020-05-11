@@ -1,7 +1,7 @@
 <div class="container">
     <h1>All users</h1>
 
-    <?php if (isset($this->isUserCreated)): ?>
+    <?php if (isset($this->user_created)): ?>
     <div class="row">
         <div class="col">
             <p class="text-success">User created successfully!</p>
