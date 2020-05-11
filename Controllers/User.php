@@ -13,10 +13,11 @@ class User extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->view->postedData = '';
-        $this->view->e_email = '';
-        $this->view->e_password = '';
-        $this->view->e_logging = '';
+        $this->view->e_logging = NULL;
+        $this->view->old_email = NULL;
+        $this->view->e_email = NULL;
+        $this->view->e_password = NULL;
+        $this->view->e_logging = NULL;
     }
 
     /**
@@ -26,9 +27,9 @@ class User extends Controller
      */
     public function index()
     {
-        if (Session::check('loginError', true)) {
-            $this->view->e_logging = true;
-            $this->view->postedData = Session::get('email');
+        if (Session::check('login_form_fail', true)) {
+            $this->view->e_logging = Session::get('e_login_pair');
+            $this->view->old_email = Session::get('old_email');
             $this->view->e_email = Session::get('e_email');
             $this->view->e_password = Session::get('e_password');
         }
@@ -79,32 +80,29 @@ class User extends Controller
      */
     public function login()
     {
-        if (!Validate::request()) Redirect::to('home');
-        $errors = Validate::loginForm();
-        $sessionData = [
-            'loginError' => true,
-            'email' => Input::get('email'),
-        ];
-        
-        if(!is_array($errors)) {
+        if (!Validate::request('POST')) Redirect::to('home');
+        if (Validate::loginForm()) {
             $user = $this->Model->login();
 
-            if($user) {
+            if ($user) {
                 // Logged in
                 Auth::setLogged();
-                Session::set('role', $user['role']);
+                Session::setMany($user);
                 Redirect::to('dashboard');
             }else {
-                // Error - wrong email/password
-                Session::setMany($sessionData);
-                Redirect::to('login');
+                // Error - wrong login or password
+                Session::set('e_login_pair', true);
             }
         }else {
-            // Error - validation fail
-            Session::setMany($sessionData);
-            Session::setMany($errors);
-            Redirect::to('login');
+            // Error - validation fails
+            Session::setMany(Validate::getErrors());
         }
+        
+        Session::setMany([
+            'old_email' => Input::getSafe('email'),
+            'login_form_fail' => true,
+        ]);
+        Redirect::to('login');
     }
     
     /**

@@ -6,16 +6,23 @@ use Classes\Input;
 
 class Validate
 {
+    // private static $_errors = [];
     private static $_errors = [];
     
+
+    public static function getErrors()
+    {
+        return self::$_errors;
+    }
+
     /**
-     * request      Validates if request equals POST.
+     * request      Validates if request equals given type.
      *
      * @return bool
      */
-    public static function request()
+    public static function request(string $type)
     {
-        return $_SERVER['REQUEST_METHOD'] === 'POST';
+        return $_SERVER['REQUEST_METHOD'] === $type;
     }
     
     /**
@@ -31,7 +38,7 @@ class Validate
         self::password();
         self::passwordMatch();
 
-        if(empty(self::$_errors)) return true;
+        if (empty(self::$_errors)) return true;
         else return self::$_errors;
     }
 
@@ -39,8 +46,8 @@ class Validate
     {
         self::email();
         self::password();
-        if(empty(self::$_errors)) return true;
-        else return self::$_errors;
+
+        return empty(self::$_errors);
     }
 
     private static function email()

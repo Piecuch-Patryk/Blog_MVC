@@ -13,7 +13,6 @@ class Auth
      */
     public static function setLogged()
     {
-        Session::init();
         Session::set('logged', true);
     }
     

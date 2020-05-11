@@ -17,6 +17,17 @@ class Input
     }
     
     /**
+     * getSafe      Sanitize string - convert to html entities.
+     *
+     * @param  mixed $name
+     * @return string value||empty string
+     */
+    public static function getSafe(string $name)
+    {
+        return htmlentities(self::get($name), ENT_SUBSTITUTE);
+    }
+    
+    /**
      * getAll   Gets all values from global $_POST method
      *
      * @return array $values

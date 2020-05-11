@@ -1,13 +1,15 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mx-auto">
-            <?php if (!empty($this->e_logging)): ?>
+
+            <?php if ($this->e_logging): ?>
             <p class="text-danger">Email or Password incorrect. Please try again.</p>
             <?php endif ?>
+
             <form action="user/login" method="post">
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input name="email" type="text" class="form-control" aria-describedby="email" value="<?php echo isset($this->postedData) ? htmlentities($this->postedData, ENT_SUBSTITUTE) : ''; ?>">
+                    <input name="email" type="text" class="form-control" aria-describedby="email" value="<?php echo $this->old_email; ?>">
                     <p class="text-danger"><?php echo $this->e_email; ?></p>
                 </div>
                 <div class="form-group">

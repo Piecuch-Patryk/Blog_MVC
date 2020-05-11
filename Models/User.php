@@ -5,6 +5,7 @@ namespace Models;
 use Classes\Hash;
 use Classes\Session;
 use Classes\Input;
+use Classes\Validate;
 
 class User extends Model
 {
@@ -52,24 +53,15 @@ class User extends Model
      */
     public function login()
     {
-        $email = Input::get('email');
-        $password = Input::get('password');
-
-        $result = $this->get('email', $email);
-        Session::init();
+        $result = $this->get('email', Input::get('email'));
 
         if($result) {
-            if(Hash::verify($password, $result['password'])) {
+            if(Hash::verify(Input::get('password'), $result['password'])) {
                 unset($result['password']);
-                Session::set('logged', true);
-                $result['fullName'] = $result['name'] . ' ' . $result['surname'];
-                Session::setMany($result);
+                $result['full_name'] = $result['name'] . ' ' . $result['surname'];
                 return $result;
             }
-        }
-
-        Session::set('error', 'Incorrect email or password.');
-        return false;
+        }else return false;
     }
     
     /**

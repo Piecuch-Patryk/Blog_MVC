@@ -21,6 +21,7 @@ class Session
      */
     public static function set(string $key, $value)
     {
+        self::init();
         $_SESSION[$key] = $value;
     }
     
@@ -45,6 +46,7 @@ class Session
      */
     public static function get(string $key)
     {
+        self::init();
         if(isset($_SESSION[$key])) return $_SESSION[$key];
         else return false;
     }
