@@ -105,6 +105,7 @@ class User extends Controller
 
         if ($user) {
             $this->view->full_name = $user['name'] . ' ' . $user['surname'];
+            unset($user['password']);
             foreach ($user as $key => $value) $this->view->{$key} = $value;
         }
         else $this->view->user_data_error = true;
