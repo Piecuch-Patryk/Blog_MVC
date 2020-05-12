@@ -6,7 +6,6 @@ use Classes\Input;
 
 class Validate
 {
-    // private static $_errors = [];
     private static $_errors = [];
     
 
