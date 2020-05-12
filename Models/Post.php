@@ -39,6 +39,14 @@ class Post extends Model
         ]);
         return $stmt->fetchAll();
     }
+
+    public function allUserPosts()
+    {
+        $conn = $this->db->connect();
+        $stmt = $conn->prepare("SELECT * FROM `$this->_table` ORDER BY created_at DESC");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     
     /**
      * store    Stores created post in database.

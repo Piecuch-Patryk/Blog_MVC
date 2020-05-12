@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Classes\Session;
 use Classes\Redirect;
+use Models\Post;
 
 class Home extends Controller
 {    
@@ -25,6 +26,11 @@ class Home extends Controller
      */
     public function index()
     {
+        $post = new Post();
+        $posts = $post->allUserPosts();
+        if ($posts) $this->view->posts = $posts;
+        else $this->view->db_error = true;
+
         $this->view->render('home/index');
     }
 }
