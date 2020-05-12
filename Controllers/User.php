@@ -13,6 +13,7 @@ class User extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->view->user_data = $_SESSION;
     }
 
     /**

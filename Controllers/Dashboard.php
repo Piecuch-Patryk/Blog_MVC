@@ -16,7 +16,7 @@ class Dashboard extends Controller
     {
         Auth::checkLogin();
         parent::__construct();
-        $this->view->userData = $_SESSION;
+        $this->view->user_data = $_SESSION;
         $this->view->logged = true;
         $this->view->postedData = '';
     }

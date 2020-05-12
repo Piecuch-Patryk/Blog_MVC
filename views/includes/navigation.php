@@ -53,7 +53,7 @@
                     Profile
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?php echo $this->url->to('user/edit/') . $this->userData['id'] ?>">Edit</a>
+                    <a class="dropdown-item" href="<?php echo $this->url->to('user/edit/') . $this->user_data['id'] ?>">Edit</a>
                     <a class="dropdown-item" href="<?php echo $this->url->to('user/logout') ?>">Logout</a>
                 </div>
             </li>
