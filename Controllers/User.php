@@ -87,6 +87,7 @@ class User extends Controller
     public function showAll()
     {
         $user_created = Session::get('user_created');
+        Session::unset('user_created');
         if ($user_created) $this->view->user_created = true;
 
         $users = $this->Model->getAll();

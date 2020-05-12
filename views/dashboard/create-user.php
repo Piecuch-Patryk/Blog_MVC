@@ -19,7 +19,7 @@
             <form action="<?php echo $this->url->to('user/store') ?>" method="post">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name" type="text" value="<?php echo isset($this->postedData['name']) ? htmlentities($this->postedData['name']) : ''; ?>" class="form-control" aria-describedby="name">
+                    <input name="name" type="text" value="<?php echo isset($this->posted_data['name']) ? $this->posted_data['name'] : ''; ?>" class="form-control" aria-describedby="name">
                     
                     <?php if (isset($this->errors['e_name'])): ?>
                     <p class="text-danger"><?php echo $this->errors['e_name'] ?></p>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label for="surname">Surname</label>
-                    <input name="surname" type="text" value="<?php echo isset($this->postedData['surname']) ? htmlentities($this->postedData['surname']) : ''; ?>" class="form-control" aria-describedby="surname">
+                    <input name="surname" type="text" value="<?php echo isset($this->posted_data['surname']) ? $this->posted_data['surname'] : ''; ?>" class="form-control" aria-describedby="surname">
 
                     <?php if (isset($this->errors['e_surname'])): ?>
                     <p class="text-danger"><?php echo $this->errors['e_surname'] ?></p>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input name="email" type="text" value="<?php echo isset($this->postedData['email']) ? htmlentities($this->postedData['email']) : ''; ?>" class="form-control" aria-describedby="email">
+                    <input name="email" type="text" value="<?php echo isset($this->posted_data['email']) ? $this->posted_data['email'] : ''; ?>" class="form-control" aria-describedby="email">
 
                     <?php if (isset($this->errors['e_email'])): ?>
                     <p class="text-danger"><?php echo $this->errors['e_email'] ?></p>
