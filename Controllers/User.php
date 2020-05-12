@@ -92,6 +92,7 @@ class User extends Controller
         $users = $this->Model->getAll();
         $this->view->users = $users;
         $this->view->user_updated = Session::get('user_updated');
+        Session::unset('user_updated');
         $this->view->render('dashboard/users');
     }
     

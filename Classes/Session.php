@@ -24,6 +24,12 @@ class Session
         self::init();
         $_SESSION[$key] = $value;
     }
+
+    public static function unset($key)
+    {
+        self::init();
+        if (isset($_SESSION[$key])) unset($_SESSION[$key]);
+    }
     
     /**
      * setMany      Sets many $_SESSION for given array[$key => $value].

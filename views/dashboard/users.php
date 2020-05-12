@@ -1,7 +1,7 @@
 <div class="container">
     <h1>All users</h1>
 
-    <?php if (isset($this->user_created)): ?>
+    <?php if ($this->user_created): ?>
     <div class="row">
         <div class="col">
             <p class="text-success">User created successfully!</p>
@@ -9,7 +9,7 @@
     </div>
     <?php endif ?>
     
-    <?php if (isset($this->user_updated)): ?>
+    <?php if ($this->user_updated): ?>
     <div class="row">
         <div class="col">
             <p class="text-success">User updated successfully!</p>
