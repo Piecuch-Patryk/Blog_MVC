@@ -21,6 +21,14 @@
     </div>
     <?php endif ?>
 
+    <?php if ($this->post_updated): ?>
+    <div class="row">
+        <div class="col">
+            <p class="text-success">Post updated successfully!</p>
+        </div>
+    </div>
+    <?php endif ?>
+
     <?php if ($this->post_deleted): ?>
     <div class="row">
         <div class="col">
@@ -29,12 +37,20 @@
     </div>
     <?php endif ?>
 
+    <?php if ($this->update_error): ?>
+    <div class="row">
+        <div class="col">
+            <p class="text-danger">Could not update the post. Please, try again later.</p>
+        </div>
+    </div>
+    <?php endif ?>
+
     <div class="row">
         <?php foreach ($this->posts as $key => $value): ?>
-        <div class="col-5">
+        <div class="col-5 mx-auto text-center">
             <h3><?php echo $value['title']; ?></h3>
             <p><?php echo $value['body']; ?></p>
-            <p><?php echo $value['created_at']; ?></p>
+            <p>created at: <?php echo $value['created_at']; ?></p>
             <a href="<?php echo $this->url->to('post/delete/') . $value['id']; ?>" class="btn btn-danger">Delete</a>
             <a href="<?php echo $this->url->to('post/edit/') . $value['id']; ?>" class="btn btn-info">Edit</a>
         </div>

@@ -103,5 +103,11 @@ Route::set('/post/edit', [
     'method' => 'edit',
 ]);
 
+// Post - update
+Route::set('/post/update', [
+    'controller' => 'Post',
+    'method' => 'update',
+]);
+
 // Registers defined routes. 
 Route::execute();
