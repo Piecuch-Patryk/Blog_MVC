@@ -79,7 +79,13 @@ class User extends Model
             ':role' => Input::get('role'),
             ]);
     }
-
+    
+    /**
+     * update       Updates user in database.
+     *
+     * @param  string $email
+     * @return bool
+     */
     public function update(string $email)
     {
         $conn = $this->db->connect();
@@ -92,8 +98,14 @@ class User extends Model
         ]);
     }
 
-
-    public function delete(int $id = NULL)
+    
+    /**
+     * delete       Deletes user in database.
+     *
+     * @param  int $id
+     * @return bool
+     */
+    public function delete(int $id)
     {
         $conn = $this->db->connect();
         $stmt = $conn->prepare("DELETE FROM `$this->_table` WHERE `id` = :id");

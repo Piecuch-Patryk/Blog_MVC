@@ -93,7 +93,7 @@ class User extends Controller
         $this->view->users = $users;
         $this->view->user_updated = Session::get('user_updated');
         $this->view->delete_error = Session::get('delete_error');
-        $this->view->delete_error = Session::get('delete_success');
+        $this->view->delete_success = Session::get('delete_success');
         Session::unset('user_updated');
         Session::unset('delete_error');
         Session::unset('delete_success');
