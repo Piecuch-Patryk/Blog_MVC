@@ -86,18 +86,18 @@ class User extends Controller
      */
     public function showAll()
     {
-        $user_created = Session::get('user_created');
-        Session::unset('user_created');
-        if ($user_created) $this->view->user_created = true;
-
         $users = $this->Model->getAll();
         $this->view->users = $users;
+        $this->view->user_created = Session::get('user_created');
         $this->view->user_updated = Session::get('user_updated');
         $this->view->delete_error = Session::get('delete_error');
         $this->view->delete_success = Session::get('delete_success');
-        Session::unset('user_updated');
-        Session::unset('delete_error');
-        Session::unset('delete_success');
+        Session::unsetMany([
+            'user_created',
+            'user_updated',
+            'delete_error',
+            'delete_success'
+        ]);
         $this->view->render('dashboard/users');
     }
     

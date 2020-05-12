@@ -24,11 +24,26 @@ class Session
         self::init();
         $_SESSION[$key] = $value;
     }
-
-    public static function unset($key)
+    
+    /**
+     * unset    Unsets $_SESSION by given key.
+     *
+     * @param  string $key
+     */
+    public static function unset(string $key)
     {
         self::init();
         if (isset($_SESSION[$key])) unset($_SESSION[$key]);
+    }
+    
+    /**
+     * unsetMany    Unsets many $_SESSION by given array[$keys].
+     *
+     * @param  array $keys
+     */
+    public static function unsetMany(array $keys)
+    {
+        foreach ($keys as $key) self::unset($key);
     }
     
     /**
@@ -38,10 +53,7 @@ class Session
      */
     public static function setMany(array $data)
     {
-        self::init();
-        foreach ($data as $key => $value) {
-            self::set($key, $value);
-        }
+        foreach ($data as $key => $value) self::set($key, $value);
     }
     
     /**
