@@ -67,10 +67,28 @@ Route::set('/user/delete', [
     'method' => 'delete',
 ]);
 
+// Dashboard - my posts
+Route::set('/dashboard/posts', [
+    'controller' => 'Dashboard',
+    'method' => 'posts',
+]);
+
 // Posts
 Route::set('/posts', [
     'controller' => 'Post',
     'method' => 'showAll',
+]);
+
+// Post - create
+Route::set('/post/create', [
+    'controller' => 'Post',
+    'method' => 'create',
+]);
+
+// Post - store
+Route::set('/post/store', [
+    'controller' => 'Post',
+    'method' => 'store',
 ]);
 
 // Post - edit

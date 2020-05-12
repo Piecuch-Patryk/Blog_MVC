@@ -41,8 +41,8 @@
                     Posts
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?php echo $this->url->to('') ?>">My posts</a>
-                    <a class="dropdown-item" href="<?php echo $this->url->to('') ?>">Create</a>
+                    <a class="dropdown-item" href="<?php echo $this->url->to('dashboard/posts') ?>">My posts</a>
+                    <a class="dropdown-item" href="<?php echo $this->url->to('post/create') ?>">Create</a>
                 </div>
             </li>
 

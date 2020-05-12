@@ -39,7 +39,12 @@ class Validate
 
         return empty(self::$_errors);
     }
-
+    
+    /**
+     * loginForm    Validates login form.
+     *
+     * @return bool
+     */
     public static function loginForm()
     {
         self::email();
@@ -47,7 +52,48 @@ class Validate
 
         return empty(self::$_errors);
     }
+    
+    /**
+     * postCreateForm   Validates post-create form.
+     *
+     * @return bool
+     */
+    public static function postCreateForm()
+    {
+        self::title();
+        self::body();
 
+        return empty(self::$_errors);
+    }
+    
+    /**
+     * title    Validates title.
+     *
+     */
+    private static function title()
+    {
+        $title = Input::get('title');
+
+        if (empty($title)) self::$_errors['e_title'] = 'Title required.';
+        else self::resetArrayField('e_title');
+    }
+    
+    /**
+     * body     Validates body.
+     *
+     */
+    private static function body()
+    {
+        $body = Input::get('body');
+
+        if (empty($body)) self::$_errors['e_body'] = 'Post\'s body can not be empty.';
+        else self::resetArrayField('e_body');
+    }
+    
+    /**
+     * email    Validates email address.
+     *
+     */
     private static function email()
     {
         $email = Input::get('email');
@@ -56,14 +102,22 @@ class Validate
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) self::$_errors['e_email'] = 'Provide correct email address.';
         else self::resetArrayField('e_email');
     }
-
+    
+    /**
+     * password     Validates password.
+     *
+     */
     private static function password()
     {
         $password = Input::get('password');
         if (empty($password)) self::$_errors['e_password'] = 'Password required.';
         else self::resetArrayField('e_password');
     }
-
+    
+    /**
+     * name     Validates name.
+     *
+     */
     private static function name()
     {
         $name = Input::get('name');
@@ -71,7 +125,11 @@ class Validate
         else if (!ctype_alpha($name)) self::$_errors['e_name'] = 'Name can only contains letters.';
         else self::resetArrayField('e_name');
     }
-
+    
+    /**
+     * surname  Validates surname.
+     *
+     */
     private static function surname()
     {
         $name = Input::get('surname');
@@ -79,7 +137,11 @@ class Validate
         else if (!ctype_alpha($name)) self::$_errors['e_surname'] = 'Surname can only contains letters.';
         else self::resetArrayField('e_surname');
     }
-
+    
+    /**
+     * passwordMatch    Check if both passwords match.
+     *
+     */
     private static function passwordMatch()
     {
         $password_1 = Input::get('password');
@@ -87,7 +149,12 @@ class Validate
         if ($password_1 !== $password_2) self::$_errors['e_password-repeat'] = 'Both passwords must be the same.';
         else self::resetArrayField('e_password-repeat');
     }
-
+    
+    /**
+     * resetArrayField      Unsets errors private array by given key $_errors[$key].
+     *
+     * @param  string $key
+     */
     private static function resetArrayField($key)
     {
         unset(self::$_errors[$key]);
