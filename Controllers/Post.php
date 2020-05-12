@@ -70,4 +70,18 @@ class Post extends Controller
     {
         echo 'edit post: ' . $id;
     }
+    
+    /**
+     * destroy      Deletes post by given id. $id = NULL due to prevent error - call method without argument.
+     *
+     * @param  mixed $id
+     */
+    public function destroy($id = NULL)
+    {
+        if ($id) {
+            $isDestroyed = $this->Model->destroy($id);
+            if ($isDestroyed) Session::set('post_deleted', true);
+        }
+        Redirect::to('dashboard/posts');
+    }
 }

@@ -55,7 +55,11 @@ class Dashboard extends Controller
         }else $this->view->db_error = true;
 
         $this->view->post_created = Session::get('post_created');
-        Session::unset('post_created');
+        $this->view->post_deleted = Session::get('post_deleted');
+        Session::unsetMany([
+            'post_creates',
+            'post_deleted',
+        ]);
         
         $this->view->render('dashboard/posts');
     }

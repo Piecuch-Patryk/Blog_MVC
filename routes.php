@@ -91,6 +91,12 @@ Route::set('/post/store', [
     'method' => 'store',
 ]);
 
+// Post - delete
+Route::set('/post/delete', [
+    'controller' => 'Post',
+    'method' => 'destroy',
+]);
+
 // Post - edit
 Route::set('/post/edit', [
     'controller' => 'Post',
