@@ -27,7 +27,7 @@ class Dashboard extends Controller
      */
     public function index()
     {
-        $this->view->pageTitle = 'Dashboard - ' . Session::get('fullName');
+        $this->view->pageTitle = 'Dashboard - ' . Session::get('name') . ' ' . Session::get('surname');
         $this->view->render('dashboard/index');
     }
     

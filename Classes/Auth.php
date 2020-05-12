@@ -4,6 +4,7 @@ namespace Classes;
 
 use Classes\Session;
 use Classes\Redirect;
+use Classes\Cookie;
 
 class Auth
 {    
@@ -11,8 +12,9 @@ class Auth
      * setLogged        Set $_SESSION['logged'] = true.
      *
      */
-    public static function setLogged()
+    public static function setLogged(string $login = NULL)
     {
+        if ($login) Cookie::set('login', $login);
         Session::set('logged', true);
     }
     
@@ -26,6 +28,11 @@ class Auth
         if(!Session::check('logged', true)) Redirect::to('home');
         else return true;
     }
+
+    public static function checkCookie()
+    {
+        return isset($_COOKIE['login']) ? $_COOKIE['login'] : false;
+    }
     
     /**
      * destroyLogin     Destroys $_SESSION and redirects to home page.
@@ -33,6 +40,7 @@ class Auth
      */
     public static function destroyLogin()
     {
+        Cookie::destroy('login');
         Session::destroy();
         Redirect::to('home');
     }

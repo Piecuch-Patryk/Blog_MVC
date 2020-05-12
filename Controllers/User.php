@@ -23,6 +23,14 @@ class User extends Controller
      */
     public function index()
     {
+        if (Auth::checkCookie()) {
+            $user = $this->Model->get('email', $_COOKIE['login']);
+            if ($user) {
+                Auth::setLogged();
+                Session::setMany($user);
+                Redirect::to('dashboard');
+            }
+        }
         if (Session::check('login_form_fail', true)) {
             $this->view->old_email = Session::get('old_email');
             $this->view->e_login_pair = Session::get('e_login_pair');
@@ -68,7 +76,9 @@ class User extends Controller
 
             if ($user) {
                 // Logged in
-                Auth::setLogged();
+                $checkbox = Input::get('remember-me');
+                if (isset($checkbox) && $checkbox === 'on') Auth::setLogged($user['email']);
+                else Auth::setLogged();
                 Session::setMany($user);
                 Redirect::to('dashboard');
             }else Session::set('e_login_pair', true);     // Error - wrong login or password
