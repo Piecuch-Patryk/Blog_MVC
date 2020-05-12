@@ -92,4 +92,13 @@ class User extends Model
         ]);
     }
 
+
+    public function delete(int $id = NULL)
+    {
+        $conn = $this->db->connect();
+        $stmt = $conn->prepare("DELETE FROM `$this->_table` WHERE `id` = :id");
+        return $stmt->execute([
+            ':id' => $id,
+        ]);
+    }
 }

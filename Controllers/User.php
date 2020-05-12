@@ -92,7 +92,11 @@ class User extends Controller
         $users = $this->Model->getAll();
         $this->view->users = $users;
         $this->view->user_updated = Session::get('user_updated');
+        $this->view->delete_error = Session::get('delete_error');
+        $this->view->delete_error = Session::get('delete_success');
         Session::unset('user_updated');
+        Session::unset('delete_error');
+        Session::unset('delete_success');
         $this->view->render('dashboard/users');
     }
     
@@ -114,7 +118,13 @@ class User extends Controller
 
         $this->view->render('dashboard/edit-user');
     }
-    
+        
+    /**
+     * update       Updates resource by id.
+     *              $id = NULL due to prevent error. (call method with no argument)
+     *
+     * @param  mixed $id
+     */
     public function update(int $id = NULL)
     {
         if ($id) {
@@ -142,12 +152,18 @@ class User extends Controller
 
     /**
      * delete       Delets user by given id.
+     *              $id = NULL due to prevent error. (call method with no argument)
      *
      * @param  int $id
      */
-    public function delete(int $id)
+    public function delete(int $id = NULL)
     {
-        var_dump($id);
+        if ($id) {
+            $deleted = $this->Model->delete($id);
+            if ($deleted) Session::set('delete_success', true);
+            else Session::set('delete_error', true);     // Error
+        }
+        Redirect::to('dashboard/users');
     }
     
     /**

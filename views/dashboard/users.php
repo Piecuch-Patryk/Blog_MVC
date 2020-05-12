@@ -17,6 +17,22 @@
     </div>
     <?php endif ?>
 
+    <?php if ($this->delete_error): ?>
+    <div class="row">
+        <div class="col">
+            <p class="text-danger">Something went wrong. Please try again.</p>
+        </div>
+    </div>
+    <?php endif ?>
+
+    <?php if ($this->delete_success): ?>
+    <div class="row">
+        <div class="col">
+            <p class="text-success">User deleted successfully!</p>
+        </div>
+    </div>
+    <?php endif ?>
+
     <!-- Desktop & Tablet -->
     <div class="row d-none d-md-block">
         <div class="col">
