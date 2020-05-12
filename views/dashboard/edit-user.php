@@ -5,27 +5,28 @@
         </div>
     </div>
 
-    <?php if (isset($this->user_data_error)): ?>
+    <?php if (isset($this->user_data_error) || isset($this->db_error) || isset($this->user_not_found)): ?>
     <div class="row">
         <div class="col">
             <p class="text-danger">Colud not load user's data. Please try again later.</p>
         </div>
     </div>
     <?php endif ?>
+
     <div class="row">
         <div class="col-10 mx-auto">
-            <form action="<?php echo $this->url->to('user/update') ?>" method="post">
+            <form action="<?php echo $this->url->to('user/update/') . $this->id; ?>" method="post">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name" type="text" value="<?php echo isset($this->name) ? $this->name : ''; ?>" class="form-control" aria-describedby="name">
+                    <input name="name" type="text" value="<?php echo $this->name; ?>" class="form-control" aria-describedby="name">
                 </div>
                 <div class="form-group">
                     <label for="surname">Surname</label>
-                    <input name="surname" type="text" value="<?php echo isset($this->surname) ? $this->surname : ''; ?>" class="form-control" aria-describedby="surname">
+                    <input name="surname" type="text" value="<?php echo $this->surname; ?>" class="form-control" aria-describedby="surname">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input name="email" type="text" value="<?php echo isset($this->email) ? $this->email : ''; ?>" class="form-control text-muted" disabled aria-describedby="surname">
+                    <input name="email" type="text" value="<?php echo $this->email; ?>" class="form-control text-muted" readonly aria-describedby="email">
                 </div>
                 <div class="form-group">
                     <label for="role">Role</label>
@@ -37,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="created_at">Created at</label>
-                    <input name="created_at" type="text" value="<?php echo isset($this->created_at) ? $this->created_at : ''; ?>" class="form-control text-muted" disabled aria-describedby="created at">
+                    <input name="created_at" type="text" value="<?php echo $this->created_at; ?>" class="form-control text-muted" disabled aria-describedby="created at">
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>

@@ -13,7 +13,12 @@ class View
     public function __construct()
     {
         $this->url = new Url();
-    }    
+    }
+
+    public function __get($name)
+    {
+        return '';
+    }
     /**
      * render   Renders view by given name.
      *

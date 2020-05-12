@@ -8,6 +8,14 @@
         </div>
     </div>
     <?php endif ?>
+    
+    <?php if (isset($this->user_updated)): ?>
+    <div class="row">
+        <div class="col">
+            <p class="text-success">User updated successfully!</p>
+        </div>
+    </div>
+    <?php endif ?>
 
     <!-- Desktop & Tablet -->
     <div class="row d-none d-md-block">

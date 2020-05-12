@@ -91,6 +91,7 @@ class User extends Controller
 
         $users = $this->Model->getAll();
         $this->view->users = $users;
+        $this->view->user_updated = Session::get('user_updated');
         $this->view->render('dashboard/users');
     }
     
@@ -113,6 +114,31 @@ class User extends Controller
         $this->view->render('dashboard/edit-user');
     }
     
+    public function update(int $id = NULL)
+    {
+        if ($id) {
+            $user = $this->Model->get('id', $id);
+
+            if ($user) {
+                $updated = $this->Model->update($user['email']);
+
+                if ($updated) {
+                    Session::set('user_updated', true);
+                    Redirect::to('dashboard/users');
+                }else {
+                    // Error - Could not update
+                    $this->view->db_error = true;
+                }
+            }else {
+                // Error - user not found in database
+                $this->view->user_not_found = true;
+            }
+            $this->view->render('dashboard/edit-user');
+        }else {
+            Redirect::to('dashboard/users');
+        }
+    }
+
     /**
      * delete       Delets user by given id.
      *

@@ -3,9 +3,7 @@
 namespace Models;
 
 use Classes\Hash;
-use Classes\Session;
 use Classes\Input;
-use Classes\Validate;
 
 class User extends Model
 {
@@ -73,13 +71,25 @@ class User extends Model
     {
         $conn = $this->db->connect();
         $stmt = $conn->prepare("INSERT INTO `$this->_table` (`id` , `name`, `surname`, `email`, `password`, `role`) VALUES (NULL, :name, :surname, :email, :password, :role)");
-        return $result = $stmt->execute([
+        return $stmt->execute([
             ':name' => Input::get('name'),
             ':surname' => Input::get('surname'),
             ':email' => Input::get('email'),
             ':password' => Hash::get(Input::get('password')),
             ':role' => Input::get('role'),
             ]);
+    }
+
+    public function update(string $email)
+    {
+        $conn = $this->db->connect();
+        $stmt = $conn->prepare("UPDATE `$this->_table` SET `name` = :name, `surname` = :surname, `role` = :role WHERE `email` = :email");
+        return $stmt->execute([
+            ':name' => Input::get('name'),
+            ':surname' => Input::get('surname'),
+            ':role' => Input::get('role'),
+            ':email' => Input::get('email'),
+        ]);
     }
 
 }

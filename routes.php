@@ -55,6 +55,11 @@ Route::set('/user/edit', [
     'controller' => 'User',
     'method' => 'edit',
 ]);
+// Dashboard - update edited user
+Route::set('/user/update', [
+    'controller' => 'User',
+    'method' => 'update',
+]);
 
 // Dashboard - delete user
 Route::set('/user/delete', [
