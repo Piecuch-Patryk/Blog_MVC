@@ -25,6 +25,8 @@ class Post extends Model
         $conn = $this->db->connect();
         $stmt = $conn->prepare("SELECT 
                                 c.name as category_name,
+                                u.name as user_name,
+                                u.surname as user_surname,
                                 p.id,
                                 p.title,
                                 p.body,
@@ -33,6 +35,7 @@ class Post extends Model
                                 p.created_at
                                 FROM `$this->_table` p 
                                 LEFT JOIN category c ON p.category_id = c.id 
+                                LEFT JOIN user u ON p.user_id = u.id 
                                 WHERE p.`$where` = :value 
                                 ORDER BY p.created_at DESC");
         $stmt->execute([
