@@ -10,6 +10,7 @@
         <?php foreach ($this->posts as $key => $value): ?>
         <div class="col-5 mx-auto">
             <h3><?php echo $value['title']; ?></h3>
+            <p>Category: <?php echo $value['category_name']; ?></p>
             <p><?php echo $value['body']; ?></p>
             <p>Created at: <?php echo $value['created_at']; ?></p>
         </div>

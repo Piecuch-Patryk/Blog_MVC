@@ -49,6 +49,7 @@
         <?php foreach ($this->posts as $key => $value): ?>
         <div class="col-5 mx-auto text-center">
             <h3><?php echo $value['title']; ?></h3>
+            <p>Category: <?php echo $value['category_name'] ?></p>
             <p><?php echo $value['body']; ?></p>
             <p>created at: <?php echo $value['created_at']; ?></p>
             <a href="<?php echo $this->url->to('post/delete/') . $value['id']; ?>" class="btn btn-danger">Delete</a>

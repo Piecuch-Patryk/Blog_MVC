@@ -12,11 +12,29 @@ class Post extends Model
     {
         parent::__construct();
     }
-
+    
+    /**
+     * get      Gets user's posts and joins category_name by category_id.
+     *
+     * @param  string $where
+     * @param  mixed $value
+     * @return bool||array
+     */
     public function get(string $where, $value)
     {
         $conn = $this->db->connect();
-        $stmt = $conn->prepare("SELECT * FROM `$this->_table` WHERE `$where` = :value ORDER BY created_at DESC");
+        $stmt = $conn->prepare("SELECT 
+                                c.name as category_name,
+                                p.id,
+                                p.title,
+                                p.body,
+                                p.user_id,
+                                p.category_id,
+                                p.created_at
+                                FROM `$this->_table` p 
+                                LEFT JOIN category c ON p.category_id = c.id 
+                                WHERE `$where` = :value 
+                                ORDER BY p.created_at DESC");
         $stmt->execute([
             ':value' => $value,
         ]);
@@ -24,14 +42,24 @@ class Post extends Model
     }
     
     /**
-     * getAll   Gets all posts.
+     * getAll   Gets all posts and joins category_name by category_id.
      *
      * @return bool||array  $posts
      */
     public function getAll()
     {
         $conn = $this->db->connect();
-        $stmt = $conn->prepare("SELECT * FROM `$this->_table` ORDER BY created_at DESC");
+        $stmt = $conn->prepare("SELECT 
+                                c.name as category_name,
+                                p.id,
+                                p.title,
+                                p.body,
+                                p.user_id,
+                                p.category_id,
+                                p.created_at
+                                FROM `$this->_table` p 
+                                LEFT JOIN category c ON p.category_id = c.id
+                                Order BY p.created_at DESC");
         $stmt->execute();
         return $stmt->fetchAll();
     }
