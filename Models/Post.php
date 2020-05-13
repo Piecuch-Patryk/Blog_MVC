@@ -14,7 +14,7 @@ class Post extends Model
     }
     
     /**
-     * get      Gets user's posts and joins category_name by category_id.
+     * get      Gets posts by given rule and joins category_name by category_id.
      *
      * @param  string $where
      * @param  mixed $value

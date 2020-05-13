@@ -7,6 +7,11 @@ Route::set('/', [
     'controller' => 'Home',
     'method' => 'index',
 ]);
+// Home - sort by chosen category
+Route::set('/home/category', [
+    'controller' => 'Home',
+    'method' => 'category',
+]);
 
 // Login form
 Route::set('/login', [
