@@ -15,7 +15,7 @@
             <h3 class="d-inline border-bottom px-3"><?php echo $value['title']; ?></h3>
             <p>Author: <?php echo $value['user_name'] . ' ' . $value['user_surname']; ?></p>
             <p>Category: <?php echo $value['category_name']; ?></p>
-            <p><?php echo $value['body']; ?></p>
+            <p><?php echo mb_strimwidth($value['body'], 0, 250, '...'); ?> <a href="<?php echo $this->url->to('post/show/') . $value['id']; ?>">[read more]</a>.</p>
             <p>Created at: <?php echo $value['created_at']; ?></p>
         </div>
         <?php endforeach ?>

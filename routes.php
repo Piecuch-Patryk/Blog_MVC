@@ -78,10 +78,10 @@ Route::set('/dashboard/posts', [
     'method' => 'posts',
 ]);
 
-// Posts
-Route::set('/posts', [
+// Posts - show chosen
+Route::set('/post/show', [
     'controller' => 'Post',
-    'method' => 'showAll',
+    'method' => 'show',
 ]);
 
 // Post - create

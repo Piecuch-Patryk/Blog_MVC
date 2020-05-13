@@ -19,9 +19,13 @@ class Post extends Controller
      * showAll      Renders view with all posts.
      *
      */
-    public function showAll()
+    public function show(int $id)
     {
-        $this->view->render('post/showAll');
+        $post = $this->Model->get('id', $id);
+        if ($post) $this->view->post = $post[0];
+        else $this->view->db_error = true;
+
+        $this->view->render('post/show');
     }
         
     /**

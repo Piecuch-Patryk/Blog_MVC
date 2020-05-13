@@ -32,13 +32,13 @@ class Home extends Controller
         $posts = $category_id !== NULL ? $post->get('category_id', $category_id) : $post->getAll();
         $categories = $category->getAll();
 
-        if ($posts) {
+        if ($posts && $categories) {
             $this->view->posts = $posts;
             $this->view->categories = $categories;
+            $this->view->active_category = $category_id;
         }
         else $this->view->db_error = true;
 
-        $this->view->active_category = $category_id;
         $this->view->render('home/index');
     }
 
