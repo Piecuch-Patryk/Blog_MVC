@@ -33,7 +33,7 @@ class Post extends Model
                                 p.created_at
                                 FROM `$this->_table` p 
                                 LEFT JOIN category c ON p.category_id = c.id 
-                                WHERE `$where` = :value 
+                                WHERE p.`$where` = :value 
                                 ORDER BY p.created_at DESC");
         $stmt->execute([
             ':value' => $value,
