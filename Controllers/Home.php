@@ -38,6 +38,7 @@ class Home extends Controller
         }
         else $this->view->db_error = true;
 
+        $this->view->active_category = $category_id;
         $this->view->render('home/index');
     }
 
