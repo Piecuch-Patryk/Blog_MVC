@@ -13,24 +13,7 @@ class Post extends Model
         parent::__construct();
     }
 
-    public function get(int $id)
-    {
-        $conn = $this->db->connect();
-        $stmt = $conn->prepare("SELECT * FROM `$this->_table` WHERE `id` = :id");
-        $stmt->execute([
-            ':id' => $id,
-        ]);
-        return $stmt->fetch();
-    }
-    
-    /**
-     * getAll   Gets all posts for specified user by given user_id.
-     *
-     * @param  string $where
-     * @param  mixed $value
-     * @return bool||array  $posts
-     */
-    public function getAll(string $where, $value)
+    public function get(string $where, $value)
     {
         $conn = $this->db->connect();
         $stmt = $conn->prepare("SELECT * FROM `$this->_table` WHERE `$where` = :value ORDER BY created_at DESC");
@@ -39,8 +22,13 @@ class Post extends Model
         ]);
         return $stmt->fetchAll();
     }
-
-    public function allUserPosts()
+    
+    /**
+     * getAll   Gets all posts.
+     *
+     * @return bool||array  $posts
+     */
+    public function getAll()
     {
         $conn = $this->db->connect();
         $stmt = $conn->prepare("SELECT * FROM `$this->_table` ORDER BY created_at DESC");
@@ -54,7 +42,7 @@ class Post extends Model
      * @param int   $id
      * @return bool
      */
-    public function store(int $id)
+    public function store(int $user_id)
     {
         $conn = $this->db->connect();
         $stmt = $conn->prepare("INSERT INTO `$this->_table` (`id`, `title`, `body`, `user_id`, `category_id`) VALUES (NULL, :title, :body, :userid, :category_id)");
@@ -62,7 +50,7 @@ class Post extends Model
             ':title' => Input::get('title'),
             ':body' => Input::get('body'),
             ':category_id' => Input::get('category'),
-            ':userid' => $id,
+            ':userid' => $user_id,
         ]);
     }
     

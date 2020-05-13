@@ -48,7 +48,7 @@ class Dashboard extends Controller
     public function posts()
     {
         $post = new Post();
-        $posts = $post->getAll('user_id', Session::get('id'));
+        $posts = $post->get('user_id', Session::get('id'));
 
         if ($posts) {
             $this->view->posts = $posts;

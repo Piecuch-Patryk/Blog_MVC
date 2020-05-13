@@ -51,7 +51,7 @@ class Post extends Controller
     public function store()
     {
         if (Validate::postCreateForm()){
-            $isStored = $this->Model->store();
+            $isStored = $this->Model->store(Session::get('id'));
             if ($isStored) {
                 Session::set('post_created', true);
                 Redirect::to('dashboard/posts');
@@ -69,10 +69,11 @@ class Post extends Controller
     public function edit(int $id = NULL)
     {
         if ($id) {
-            $post = $this->Model->get($id);
+            $post = $this->Model->get('id', $id);
+
             $category = new Category();
             $this->view->categories = $category->getAll();
-            if ($post) $this->view->posted_data = $post;
+            if ($post) $this->view->posted_data = $post[0];
             else $this->view->db_error = true;
             
             $this->view->e_title = Session::get('e_title');
@@ -81,7 +82,7 @@ class Post extends Controller
                 'e_title',
                 'e_body',
                 ]);
-                $this->view->render('dashboard/edit-post');
+            $this->view->render('dashboard/edit-post');
         }else Redirect::to('dashboard/posts');
     }
         

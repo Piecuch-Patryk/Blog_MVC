@@ -27,7 +27,7 @@ class Home extends Controller
     public function index()
     {
         $post = new Post();
-        $posts = $post->allUserPosts();
+        $posts = $post->getAll();
         if ($posts) $this->view->posts = $posts;
         else $this->view->db_error = true;
 
