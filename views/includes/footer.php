@@ -1,5 +1,5 @@
-    <footer>
-        Page Footer
+    <footer class="container bg-dark">
+        <p class="mb-0 p-2 text-light text-center">Created by <a class="text-light" href="https://patrykpiecuch.pl">Patryk Piecuch</a></p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
