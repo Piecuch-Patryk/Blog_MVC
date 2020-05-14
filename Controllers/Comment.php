@@ -9,7 +9,11 @@ use Classes\Input;
 
 class Comment extends Controller
 {
-
+    
+    /**
+     * store    Calls model to store comment if validated positive.
+     *
+     */
     public function store()
     {
         if (Validate::commentForm()) {

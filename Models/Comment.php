@@ -8,7 +8,13 @@ class Comment extends Model
 {
     private $_table = 'comment';
     
-
+    
+    /**
+     * get      Retrieves comments from database related to given post id.
+     *
+     * @param  int $post_id
+     * @return bool||array
+     */
     public function get(int $post_id)
     {
         $conn = $this->db->connect();

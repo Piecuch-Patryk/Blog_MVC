@@ -41,7 +41,12 @@ class Home extends Controller
 
         $this->view->render('home/index');
     }
-
+    
+    /**
+     * category     Gets current category id by the name.
+     *
+     * @param  string $category_name
+     */
     public function category(string $category_name)
     {
         $category = new Category();

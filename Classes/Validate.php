@@ -65,7 +65,12 @@ class Validate
 
         return empty(self::$_errors);
     }
-    
+        
+    /**
+     * commentForm  Validates comment form.
+     *
+     * @return bool
+     */
     public static function commentForm()
     {
         self::fullName();
@@ -73,7 +78,11 @@ class Validate
 
         return empty(self::$_errors);
     }
-
+    
+    /**
+     * fullName     Validates fullname.
+     *
+     */
     private static function fullName()
     {
         $fullName = Input::get('name');
@@ -98,6 +107,7 @@ class Validate
     /**
      * body     Validates body.
      *
+     * @param string
      */
     private static function body(string $name)
     {
