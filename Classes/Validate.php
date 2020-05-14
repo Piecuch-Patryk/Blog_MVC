@@ -61,11 +61,28 @@ class Validate
     public static function postCreateForm()
     {
         self::title();
-        self::body();
+        self::body("Post's");
 
         return empty(self::$_errors);
     }
     
+    public static function commentForm()
+    {
+        self::fullName();
+        self::body("Comment's");
+
+        return empty(self::$_errors);
+    }
+
+    private static function fullName()
+    {
+        $fullName = Input::get('name');
+
+        if (empty($fullName)) self::$_errors['e_name'] = 'Name required.';
+        else if (!ctype_alpha(str_replace(' ', '', $fullName))) self::$_errors['e_name'] = 'Name must contains letters and spaces only.';
+        else self::resetArrayField('e_name');
+    }
+
     /**
      * title    Validates title.
      *
@@ -82,11 +99,11 @@ class Validate
      * body     Validates body.
      *
      */
-    private static function body()
+    private static function body(string $name)
     {
         $body = Input::get('body');
 
-        if (empty($body)) self::$_errors['e_body'] = 'Post\'s body can not be empty.';
+        if (empty($body)) self::$_errors['e_body'] = "$name body can not be empty.";
         else self::resetArrayField('e_body');
     }
     

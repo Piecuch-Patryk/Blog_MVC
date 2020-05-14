@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\Category;
+use Models\Comment;
 use Classes\Validate;
 use Classes\Input;
 use Classes\Session;
@@ -22,8 +23,37 @@ class Post extends Controller
     public function show(int $id)
     {
         $post = $this->Model->get('id', $id);
-        if ($post) $this->view->post = $post[0];
+
+        if ($post){
+            $this->view->post = $post[0];
+            $related_posts = $this->Model->get('category_id', $post[0]['category_id']);
+            $comment = new Comment();
+            $related_comments = $comment->get($id);
+
+            if ($related_posts) $this->view->related_posts = $related_posts;
+            else $this->view->related_posts_error = true;
+
+            if ($related_comments) {
+                if (count($related_comments) > 0) $this->view->related_comments = $related_comments;
+                else $this->view->no_related_comments = true;
+            }
+        }
         else $this->view->db_error = true;
+        
+        $this->view->comment_added = Session::get('comment_added');
+        $this->view->db_error_comment = Session::get('db_error_comment');
+        $this->view->e_name = Session::get('e_name');
+        $this->view->e_body = Session::get('e_body');
+        $this->view->posted_data = Session::get('posted_data');
+        $this->view->validate_error = Session::get('validate_error');
+        Session::unsetMany([
+            'comment_added',
+            'db_error_comment',
+            'e_name',
+            'e_body',
+            'posted_data',
+            'validate_error',
+            ]);
 
         $this->view->render('post/show');
     }

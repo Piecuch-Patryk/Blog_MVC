@@ -114,5 +114,11 @@ Route::set('/post/update', [
     'method' => 'update',
 ]);
 
+// Comment - store
+Route::set('/comment/store', [
+    'controller' => 'Comment',
+    'method' => 'store',
+]);
+
 // Registers defined routes. 
 Route::execute();
